@@ -1,0 +1,27 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    restart: always
+    environment:
+      MONGO_DATA_DIR: '/data/db'
+      MONGO_LOG_DIR: '/dev/null'
+      MONGO_INITDB_ROOT_USERNAME: 'creativeTim'
+      MONGO_INITDB_ROOT_PASSWORD: 'creativeTim'
+      MONGO_INITDB_DATABASE: 'argon_dashboard'
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+  haproxy:
+    image: haproxy:1.9-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg

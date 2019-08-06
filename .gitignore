@@ -1,0 +1,10 @@
+/node_modules
+yarn.lock
+yarn-error.log
+.vscode
+/dist
+public/css/*.min.css
+public/js/*.min.js
+package-lock.json
+.idea
+data
