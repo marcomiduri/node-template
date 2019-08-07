@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'argon-free-backend',
-      script: './bin/www',
+      script: './bin/www.js',
 
       node_args: ['--inspect=0.0.0.0:9229'],
       watch: true,

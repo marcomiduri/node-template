@@ -8,3 +8,4 @@ public/js/*.min.js
 package-lock.json
 .idea
 data
+.env

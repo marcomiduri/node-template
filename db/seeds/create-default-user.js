@@ -3,19 +3,19 @@ const database = require('../index');
 const logger = require('../../logger');
 
 const DEFAULT_PASSWORD = 'secret';
+const DEFAULT_USER = {
+  name: 'admin admin',
+  email: 'admin@argon.com',
+};
 
 const createDefaultUser = async db => {
   const { User } = db;
-  const any = await User.findOne();
-  if (any) {
-    logger.info('Warning: "users" is not empty.');
+  const user = await User.findOne({ email: DEFAULT_USER.email });
+  if (user) {
+    logger.warn('Default user already created. Abort.');
   } else {
-    const hashedPass = await bcrypt.hash(DEFAULT_PASSWORD, 5);
-    await User.create({
-      name: 'admin admin',
-      email: 'admin@argon.com',
-      password: hashedPass,
-    });
+    DEFAULT_USER.password = await bcrypt.hash(DEFAULT_PASSWORD, 5);
+    await User.create(DEFAULT_USER);
     logger.info('Default user was successfully created.');
   }
 };

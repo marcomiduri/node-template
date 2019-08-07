@@ -62,8 +62,9 @@ module.exports = function initAuthMiddleware(app) {
   if (GOOGLE_CLIENT_ID && GOOGLE_CLIENT_SECRET && GOOGLE_CLIENT_CALLBACK) {
     app.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
 
+    const callbackPath = new URL(GOOGLE_CLIENT_CALLBACK).pathname;
     app.get(
-      '/auth/google/callback',
+      callbackPath,
       passport.authenticate('google', {
         successRedirect: '/',
         failureRedirect: '/login',

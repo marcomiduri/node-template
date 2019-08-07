@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const redisStoreConfig = {
   host: process.env.REDIS_HOST,
   port: process.env.REDIS_PORT,
+  logErrors: true, // Enable logging for Redis errors.
 };
 
 if (process.env.REDIS_URL) {

@@ -1,11 +1,12 @@
 {
-  "name": "node-template",
+  "name": "argon-dashboard-nodejs",
   "version": "1.0.1",
   "private": true,
   "scripts": {
     "pm2": "pm2",
     "gulp": "gulp",
-    "start": "node ./bin/www",
+    "prestart": "node getEnv",
+    "start": "node ./bin/www.js",
     "start:staging": "pm2 start",
     "dev": "concurrently \"pm2 start\" \"gulp\"",
     "monitor": "pm2 monit",
@@ -15,6 +16,7 @@
     "mongoose-init": "node ./db/seeds/create-default-user.js"
   },
   "dependencies": {
+    "@google-cloud/storage": "^3.0.4",
     "async-middleware": "^1.2.1",
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",

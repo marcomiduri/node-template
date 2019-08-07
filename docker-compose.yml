@@ -4,17 +4,9 @@ services:
     image: mongo:latest
     container_name: "mongodb"
     restart: always
-    environment:
-      MONGO_DATA_DIR: '/data/db'
-      MONGO_LOG_DIR: '/dev/null'
-      MONGO_INITDB_ROOT_USERNAME: 'creativeTim'
-      MONGO_INITDB_ROOT_PASSWORD: 'creativeTim'
-      MONGO_INITDB_DATABASE: 'argon_dashboard'
-    volumes:
-      - ./data/db:/data/db
     ports:
       - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command: --smallfiles
   redis:
     image: redis:alpine
     ports:
