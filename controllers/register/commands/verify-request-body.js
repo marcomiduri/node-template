@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require('@hapi/joi');
 
 const constants = require('../constants');
 
@@ -12,7 +12,7 @@ const schema = Joi.object().keys({
   password: Joi.string()
     .min(PASSWORD_MIN)
     .max(PASSWORD_MAX),
-  username: Joi.string().email({ minDomainAtoms: 2 }),
+  username: Joi.string().email({ minDomainSegments: 2 }),
 });
 
 async function validateRegisterPayload(req, res, next) {

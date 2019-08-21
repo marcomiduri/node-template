@@ -1,5 +1,4 @@
 const { Storage } = require('@google-cloud/storage');
-const exec = require('child_process').execSync;
 
 const { GOOGLE_CLOUD_PROJECT } = process.env;
 const logger = require('./logger');
@@ -30,15 +29,6 @@ const downloadEnvFile = async () => {
 
 const run = async () => {
   await downloadEnvFile();
-
-  if (process.env.NODE_ENV === 'production') {
-    logger.info('Production environment detected, running gulp to build dist.');
-    try {
-      exec('npm run gulp build', { stdio: 'inherit' });
-    } catch (e) {
-      logger.error('Error while building dist: %s', e);
-    }
-  }
 };
 
-run();
+run().then(() => logger.info('Pre-init is finished.'));
